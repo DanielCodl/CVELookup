@@ -4,5 +4,5 @@
     <string name="bt_submit_cve_text">CVE Lookup</string>
     <string name="cve_hint">CVE-YYYY-NNNN(NNN)</string>
     <string name="cve_date_test">01/01/2017</string>
-    <string name="cve_desc_test">The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka "Windows SMB Remote Code Execution Vulnerability." This vulnerability is different from those described in CVE&#8211;2017&#8211;0143, CVE&#8211;2017&#8211;0145, CVE&#8211;2017&#8211;0146, and CVE&#8211;2017&#8211;0148.</string>
+    <string name="cve_desc_test">The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka "Windows SMB Remote Code Execution Vulnerability." This vulnerability is different from those described in CVE&#8208;2017&#8208;0143, CVE&#8208;2017&#8208;0145, CVE&#8208;2017&#8208;0146, and CVE&#8208;2017&#8208;0148.</string>
 </resources>
