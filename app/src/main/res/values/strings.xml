@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CVE Lookup</string>
+    <string name="btn_cve_submit">CVE Lookup</string>
+    <string name="cve_hint">CVE-YYYY-NNNN(NNN)</string>
 </resources>
