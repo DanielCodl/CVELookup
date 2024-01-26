@@ -1,5 +1,6 @@
 package com.example.cvelookup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val tv_cve_date_view = binding.tvCveDate // findViewById<TextView>(R.id.tv_cve_date)
         val tv_cve_desc_view = binding.tvCveDesc // findViewById<TextView>(R.id.tv_cve_desc)
         val bt_submit_cve_button = binding.btSubmitCve // findViewById<Button>(R.id.bt_submit_cve)
+        val bt_search_history = binding.btSearchHistory
 
         bt_submit_cve_button.setOnClickListener() {
             if (binding.evCveNum.text.isEmpty()){
@@ -32,6 +34,12 @@ class MainActivity : AppCompatActivity() {
             tv_cve_date_view.text=getString(R.string.cve_date_test)
             tv_cve_desc_view.text=getString(R.string.cve_desc_test)
             }
+        }
+
+        bt_search_history.setOnClickListener(){
+            val intent = Intent(this,SearchHistoryActivity::class.java)
+
+            startActivity(intent)
         }
     }
 }
