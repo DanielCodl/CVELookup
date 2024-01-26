@@ -10,17 +10,18 @@
         android:id="@+id/ev_cve_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:autofillHints="@string/cve_hint"
         android:ems="10"
         android:hint="@string/cve_hint"
         android:inputType="text"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_intro" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.108" />
 
     <Button
         android:id="@+id/bt_submit_cve"
@@ -30,9 +31,12 @@
         android:backgroundTint="@color/red"
         android:text="@string/bt_submit_cve_text"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ev_cve_num" />
+        app:layout_constraintTop_toBottomOf="@+id/ev_cve_num"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_cve_num"
@@ -70,19 +74,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_cve_num" />
 
-    <TextView
-        android:id="@+id/tv_intro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/tv_intro_text"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold|italic"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="223dp"
+        android:layout_height="202dp"
+        android:contentDescription="@string/logo_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cveicon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
