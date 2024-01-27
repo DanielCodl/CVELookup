@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">CVE Lookup</string>
     <string name="tv_intro_text">Zadejte CVE (Common Vulnerabilities and Exposures) identifikator:</string>
-    <string name="bt_submit_cve_text">GO</string>
-    <string name="bt_search_history_text">SEARCH HISTORY</string>
+    <string name="bt_submit_cve_text">FETCH</string>
+    <string name="bt_search_history_text">RECENT SEARCHES</string>
+    <string name="bt_ocr_text">SCAN OCR</string>
+    <string name="bt_exit_text">QUIT</string>
     <string name="bt_back_main_text">RETURN</string>
     <string name="cve_hint">CVE-YYYY-NNNN(NNN)</string>
     <string name="cve_date_test">01/01/2017</string>

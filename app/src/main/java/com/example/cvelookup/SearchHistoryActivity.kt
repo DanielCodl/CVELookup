@@ -1,6 +1,5 @@
 package com.example.cvelookup
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,9 +12,7 @@ class SearchHistoryActivity : AppCompatActivity() {
         val bt_return_button = findViewById<Button>(R.id.bt_return)
 
         bt_return_button.setOnClickListener(){
-            val intent = Intent(this,MainActivity::class.java)
-
-            startActivity(intent)
+            finish()
         }
     }
 }

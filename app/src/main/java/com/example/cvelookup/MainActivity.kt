@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         val tv_cve_date_view = binding.tvCveDate // findViewById<TextView>(R.id.tv_cve_date)
         val tv_cve_desc_view = binding.tvCveDesc // findViewById<TextView>(R.id.tv_cve_desc)
         val bt_submit_cve_button = binding.btSubmitCve // findViewById<Button>(R.id.bt_submit_cve)
-        val bt_search_history = binding.btSearchHistory
+        val bt_search_history = binding.btRecent
+        val bt_exit_button  = binding.btExit
 
         bt_submit_cve_button.setOnClickListener() {
             if (binding.evCveNum.text.isEmpty()){
@@ -40,6 +41,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,SearchHistoryActivity::class.java)
 
             startActivity(intent)
+        }
+
+        bt_exit_button.setOnClickListener(){
+            //finish()
+            // on below line we are exiting our activity
+            System.exit(0)
         }
     }
 }
