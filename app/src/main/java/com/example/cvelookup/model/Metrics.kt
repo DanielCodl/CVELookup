@@ -1,4 +1,4 @@
-package com.example.cvelookup.response
+package com.example.cvelookup.model
 
 data class Metrics(
     val cvssMetricV2: List<CvssMetricV2>,

@@ -1,4 +1,4 @@
-package com.example.cvelookup.response
+package com.example.cvelookup.model
 
 data class CvssMetricV31(
     val cvssData: CvssDataX,

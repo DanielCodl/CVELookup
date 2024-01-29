@@ -1,4 +1,4 @@
-package com.example.cvelookup.response
+package com.example.cvelookup.model
 
 data class Cve(
     val configurations: List<Configuration>,
@@ -10,5 +10,5 @@ data class Cve(
     val references: List<Reference>,
     val sourceIdentifier: String,
     val vulnStatus: String,
-    val weaknesses: List<Weaknesse>
+    val weaknesses: List<Weaknesses>
 )

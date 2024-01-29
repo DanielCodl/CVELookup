@@ -1,6 +1,6 @@
-package com.example.cvelookup.response
+package com.example.cvelookup.model
 
-data class CveTopResponse(
+data class CveJson(
     val format: String,
     val resultsPerPage: Int,
     val startIndex: Int,

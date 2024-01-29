@@ -56,6 +56,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
     //Retrofit - work with API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

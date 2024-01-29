@@ -6,7 +6,7 @@
     <data>
         <variable
             name="cve"
-            type="com.example.cvelookup.response.Cve" />
+            type="com.example.cvelookup.model.Cve" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

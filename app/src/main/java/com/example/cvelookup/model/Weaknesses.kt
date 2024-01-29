@@ -1,6 +1,6 @@
-package com.example.cvelookup.response
+package com.example.cvelookup.model
 
-data class Weaknesse(
+data class Weaknesses(
     val description: List<Description>,
     val source: String,
     val type: String
