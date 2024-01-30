@@ -3,6 +3,7 @@ package com.example.cvelookup
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.example.cvelookup.api.ApiServices
 import com.example.cvelookup.api.RetrofitInstance
+import com.example.cvelookup.database.CveDTO
+import com.example.cvelookup.database.CveViewModel
 import com.example.cvelookup.databinding.ActivityMainBinding
 import com.example.cvelookup.model.CveJson
 import retrofit2.Response
@@ -17,6 +20,7 @@ import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mCveViewModel: CveViewModel
     private lateinit var binding: ActivityMainBinding
     //private lateinit var viewModel: CveJsonViewModel
 
@@ -29,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        mCveViewModel =ViewModelProvider(this).get(CveViewModel::class.java)
+
 
 
 
@@ -38,19 +44,26 @@ val tv_cve_date_view = binding.tvCveDate // findViewById<TextView>(R.id.tv_cve_d
 val tv_cve_desc_view = binding.tvCveDesc // findViewById<TextView>(R.id.tv_cve_desc)
 val bt_submit_cve_button = binding.btSubmitCve // findViewById<Button>(R.id.bt_submit_cve)
 val bt_search_history = binding.btRecent
+val bt_scan_ocr_button = binding.btOcr
 val bt_exit_button  = binding.btExit
+
+
+
 
 bt_submit_cve_button.setOnClickListener() {
     if (binding.evCveNum.text.isEmpty()){
         Toast.makeText(this@MainActivity, "CVE number cannot be empty!", Toast.LENGTH_SHORT).show()
     } else{
-        val cveId : String = "CVE-2019-1010218"
-        //binding.evCveNum.text.clear()
+        //val cveId : String = "CVE-2019-1010218"
+        // binding.evCveNum.text.clear()
+
+        binding.progressBar.visibility= View.VISIBLE
+
         val retrofitService = RetrofitInstance.getRetrofitInstance().create(ApiServices::class.java)
         val responseLiveData: LiveData<Response<CveJson>> =
 
             liveData {
-                val response = retrofitService.getCveJson("CVE-2022-38392")
+                val response = retrofitService.getCveJson(binding.evCveNum.text.toString())
                 emit(response)
             }
 
@@ -59,7 +72,20 @@ bt_submit_cve_button.setOnClickListener() {
             tv_cve_num_view.text= it.body()?.vulnerabilities!![0].cve.id
             tv_cve_date_view.text= it.body()?.vulnerabilities!![0].cve.published
             tv_cve_desc_view.text= it.body()?.vulnerabilities!![0].cve.descriptions[0].value
+            binding.progressBar.visibility= View.INVISIBLE
         })
+
+        val cveid: String = tv_cve_num_view.text.toString()
+        val published: String = tv_cve_date_view.text.toString()
+        val description: String = tv_cve_desc_view.text.toString()
+
+        val record = CveDTO(0,cveid,published,description)
+
+        mCveViewModel.addCve(record)
+
+        Toast.makeText(this@MainActivity, "Success!", Toast.LENGTH_SHORT).show()
+
+
     }
 }
 
@@ -74,5 +100,7 @@ bt_exit_button.setOnClickListener(){
     // on below line we are exiting our activity
     System.exit(0)
 }
+
+
 }
 }
