@@ -3,6 +3,7 @@ package com.example.cvelookup
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -59,32 +60,44 @@ bt_submit_cve_button.setOnClickListener() {
 
         binding.progressBar.visibility= View.VISIBLE
 
-        val retrofitService = RetrofitInstance.getRetrofitInstance().create(ApiServices::class.java)
-        val responseLiveData: LiveData<Response<CveJson>> =
 
-            liveData {
-                val response = retrofitService.getCveJson(binding.evCveNum.text.toString())
-                emit(response)
-            }
+            val retrofitService =
+                RetrofitInstance.getRetrofitInstance().create(ApiServices::class.java)
 
-        responseLiveData.observe(this, Observer {
-            //tv_cve_num_view.text= it.body()?.totalResults.toString()
-            tv_cve_num_view.text= it.body()?.vulnerabilities!![0].cve.id
-            tv_cve_date_view.text= it.body()?.vulnerabilities!![0].cve.published
-            tv_cve_desc_view.text= it.body()?.vulnerabilities!![0].cve.descriptions[0].value
-            binding.progressBar.visibility= View.INVISIBLE
-        })
+            val responseLiveData: LiveData<Response<CveJson>> =
 
-        val cveid: String = tv_cve_num_view.text.toString()
-        val published: String = tv_cve_date_view.text.toString()
-        val description: String = tv_cve_desc_view.text.toString()
+                liveData {
+                    val response = retrofitService.getCveJson(binding.evCveNum.text.toString())
+                    emit(response)
+                }
 
-        val record = CveDTO(0,cveid,published,description)
 
-        mCveViewModel.addCve(record)
 
-        Toast.makeText(this@MainActivity, "Success!", Toast.LENGTH_SHORT).show()
 
+            responseLiveData.observe(this, Observer {
+                // Handle API call errors - output is NULL
+                if (it.body() != null) {
+                    tv_cve_num_view.text = it.body()?.vulnerabilities!![0].cve.id
+                    tv_cve_date_view.text = it.body()?.vulnerabilities!![0].cve.published
+                    tv_cve_desc_view.text = it.body()?.vulnerabilities!![0].cve.descriptions[0].value
+
+                    val cveid: String = tv_cve_num_view.text.toString()
+                    val published: String = tv_cve_date_view.text.toString()
+                    val description: String = tv_cve_desc_view.text.toString()
+
+                    val record = CveDTO(0, cveid, published, description)
+
+                    mCveViewModel.addCve(record)
+
+                    Toast.makeText(this@MainActivity, "Success!", Toast.LENGTH_SHORT).show()
+
+
+                } else {
+                    Toast.makeText(this@MainActivity, "Error fetching data from REST API - CVE "+binding.evCveNum.text.toString()+" does NOT exist!", Toast.LENGTH_LONG).show()
+                }
+                binding.evCveNum.text.clear()
+                binding.progressBar.visibility = View.INVISIBLE
+            })
 
     }
 }
