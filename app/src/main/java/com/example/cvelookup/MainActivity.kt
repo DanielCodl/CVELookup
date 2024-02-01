@@ -18,6 +18,7 @@ import com.example.cvelookup.databinding.ActivityMainBinding
 import com.example.cvelookup.model.CveJson
 import retrofit2.Response
 import retrofit2.create
+import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +47,7 @@ val tv_cve_desc_view = binding.tvCveDesc // findViewById<TextView>(R.id.tv_cve_d
 val bt_submit_cve_button = binding.btSubmitCve // findViewById<Button>(R.id.bt_submit_cve)
 val bt_search_history = binding.btRecent
 val bt_scan_ocr_button = binding.btOcr
+val bt_about_button = binding.btAbout
 val bt_exit_button  = binding.btExit
 
 
@@ -82,9 +84,20 @@ bt_submit_cve_button.setOnClickListener() {
                     val cveid: String = it.body()?.vulnerabilities!![0].cve.id
                     val published: String = it.body()?.vulnerabilities!![0].cve.published
                     val description: String = it.body()?.vulnerabilities!![0].cve.descriptions[0].value
-                    val baseScore: Double = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseScore
-                    val baseSeverity: String = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseSeverity
-                    val vectorString: String = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.vectorString
+
+                    // Additional check for NulPointer needed in case of missing cvssMetricV31 data (for old CVEs)
+                    // Currently if cvssMetricV31 is missing it populates the missing fields with default values (ie. 0, N/A, N/A)
+                    var baseScore: Double = 0.0
+                    var baseSeverity: String = "N/A"
+                    var vectorString: String = "N/A"
+
+                    try {
+                        baseScore = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseScore
+                        baseSeverity = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseSeverity
+                        vectorString = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.vectorString
+                        } catch (e: NullPointerException) {
+                            // Fetch older cvssMetricV2 data (for older CVEs) if it exists
+                        }
 
                     tv_cve_num_view.text = vectorString
                     tv_cve_date_view.text = baseSeverity
@@ -109,6 +122,12 @@ bt_submit_cve_button.setOnClickListener() {
 
 bt_search_history.setOnClickListener(){
     val intent = Intent(this,SearchHistoryActivity::class.java)
+
+    startActivity(intent)
+}
+
+bt_about_button.setOnClickListener(){
+    val intent = Intent(this,AboutActivity::class.java)
 
     startActivity(intent)
 }

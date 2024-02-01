@@ -20,7 +20,6 @@ class SearchHistoryActivity : AppCompatActivity() {
 
         // Recyclerview
         val adapter = ListAdapter()
-        //val recyclerView = RecyclerView(this)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview1)
         recyclerView.adapter = adapter
         recyclerView.layoutManager =LinearLayoutManager(this)

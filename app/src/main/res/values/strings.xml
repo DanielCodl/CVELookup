@@ -7,4 +7,21 @@
     <string name="bt_back_main_text">RETURN</string>
     <string name="cve_hint">CVE-YYYY-NNNN(NNN)</string>
     <string name="logo_desc">CVE main logo</string>
+    <string name="bt_about_text">ABOUT</string>
+    <string name="bt_sample_text">TEST SAMPLE CVE</string>
+    <string name="tv_about_heading">About the CVE Lookup application</string>
+    <string name="tv_about_body">This application fetches details about particular CVE (Common Vulnerabilities and Exposures) from NIST National Vulnerability Database
+        (nvd.nist.gov) using REST API services and stores the retrieved info into Room database. Results can then be reviewed locally using Recycler View.\n
+        \nNIST NVD Web Services: https://nvd.nist.gov/developers/vulnerabilities\n
+    \nApplication currently supports CVEs with "cvssMetricV31" metric.\n
+    \nData object consists of the following fields:\n
+    \n- cveid (ex. CVE-2022-38392)
+    \n- baseScore (ex. 5.3)
+    \n- baseSeverity (ex. MEDIUM)
+    \n- vectorString (ex. CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H)
+    \n- published (ex. 2024-02-01T15:31:27.863)
+    \n- description (text describing the vulnerability)\n
+    \n App Version: 0.99\n
+    \n Contact Details: d_codl@utb.cz
+    </string>
 </resources>
