@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class CveViewModel(application: Application): AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<CveDTO>>
+    val readAllData: LiveData<List<CveDTO>>
     private val repository: CveRepository
 
     init {

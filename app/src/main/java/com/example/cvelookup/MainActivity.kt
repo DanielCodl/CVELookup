@@ -77,20 +77,25 @@ bt_submit_cve_button.setOnClickListener() {
             responseLiveData.observe(this, Observer {
                 // Handle API call errors - output is NULL
                 if (it.body() != null) {
-                    tv_cve_num_view.text = it.body()?.vulnerabilities!![0].cve.id
-                    tv_cve_date_view.text = it.body()?.vulnerabilities!![0].cve.published
-                    tv_cve_desc_view.text = it.body()?.vulnerabilities!![0].cve.descriptions[0].value
 
-                    val cveid: String = tv_cve_num_view.text.toString()
-                    val published: String = tv_cve_date_view.text.toString()
-                    val description: String = tv_cve_desc_view.text.toString()
+                    // Json response to Data Object mapping
+                    val cveid: String = it.body()?.vulnerabilities!![0].cve.id
+                    val published: String = it.body()?.vulnerabilities!![0].cve.published
+                    val description: String = it.body()?.vulnerabilities!![0].cve.descriptions[0].value
+                    val baseScore: Double = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseScore
+                    val baseSeverity: String = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.baseSeverity
+                    val vectorString: String = it.body()?.vulnerabilities!![0].cve.metrics.cvssMetricV31[0].cvssData.vectorString
 
-                    val record = CveDTO(0, cveid, published, description)
+                    tv_cve_num_view.text = vectorString
+                    tv_cve_date_view.text = baseSeverity
+                    tv_cve_desc_view.text = baseScore.toString()
 
+                    val record = CveDTO(0, cveid, published, description, baseScore, baseSeverity, vectorString)
+
+                    // Store data to Room database
                     mCveViewModel.addCve(record)
 
                     Toast.makeText(this@MainActivity, "Success!", Toast.LENGTH_SHORT).show()
-
 
                 } else {
                     Toast.makeText(this@MainActivity, "Error fetching data from REST API - CVE "+binding.evCveNum.text.toString()+" does NOT exist!", Toast.LENGTH_LONG).show()
